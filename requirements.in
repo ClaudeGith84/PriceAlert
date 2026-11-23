@@ -1,0 +1,6 @@
+# Direkte Abhängigkeiten. requirements.txt (mit Hashes) daraus erzeugen:
+#   uv pip compile requirements.in --python-version 3.12 --generate-hashes -o requirements.txt
+requests>=2.31
+beautifulsoup4>=4.12
+lxml>=5.0
+PyYAML>=6.0

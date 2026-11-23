@@ -12,7 +12,7 @@ on:
         default: false
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: pricewatch
@@ -22,15 +22,21 @@ jobs:
   check:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: write   # nur für den Commit des Preisverlaufs
     steps:
-      - uses: actions/checkout@v4
+      # Actions per Commit-SHA gepinnt (Tags sind verschiebbar); Dependabot hält sie aktuell.
+      # Token nicht in .git/config ablegen – pip-Pakete und Shop-HTML sollen ihn nicht sehen.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: "3.12"
           cache: pip
 
-      - run: pip install -r requirements.txt
+      - run: pip install --require-hashes -r requirements.txt
 
       - name: Testnachricht
         if: ${{ inputs.test_notify }}
@@ -48,7 +54,10 @@ jobs:
 
       - name: Verlauf speichern
         if: ${{ !inputs.test_notify }}
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git config user.name "pricewatch-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/

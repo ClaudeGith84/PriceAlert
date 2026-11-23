@@ -5,12 +5,18 @@ Läuft kostenlos über GitHub Actions; der Preisverlauf landet als CSV im Repo.
 
 ## Einrichtung (ca. 10 Minuten)
 
-1. **Repo anlegen**: auf GitHub ein neues, **öffentliches** Repository erstellen und diese Dateien hochladen
+1. **Repo anlegen**: auf GitHub ein neues Repository erstellen und diese Dateien hochladen
    (Ordner `.github` nicht vergessen).
+   Öffentlich = unbegrenzte Actions-Minuten, aber Watchlist, Preisverlauf (`data/`) und Action-Logs sind für alle sichtbar.
+   Privat = nichts davon öffentlich, dafür zählen die Läufe gegen das freie Minuten-Kontingent.
 2. **ntfy einrichten**: App „ntfy“ installieren (iOS/Android) → `+` → einen Kanalnamen abonnieren.
-   Nimm einen schwer erratbaren Namen, z. B. `bf-preise-k7x29q` – wer den Namen kennt, kann mitlesen.
+   Der Kanalname ist bei ntfy.sh das einzige Geheimnis: Wer ihn kennt, kann mitlesen **und dir gefälschte
+   Nachrichten (mit beliebigem Link) schicken**. Erzeuge ihn zufällig, statt einen Namen aus einer Anleitung zu
+   übernehmen, z. B. mit `python -c "import secrets; print('bf-' + secrets.token_urlsafe(18))"`.
+   Noch sicherer: ntfy-Konto mit reserviertem Kanal und Zugriffstoken (dann zusätzlich Secret `NTFY_TOKEN`).
 3. **Secret hinterlegen**: im Repo *Settings → Secrets and variables → Actions → New repository secret*
    - Name: `NTFY_TOPIC`, Wert: dein Kanalname
+   - optional `NTFY_TOKEN`: dein ntfy-Zugriffstoken
 4. **Test**: *Actions → Preiswächter → Run workflow*, Haken bei „Nur Testnachricht senden“ → die Nachricht sollte aufs Handy kommen.
 5. **Erster echter Lauf**: noch einmal *Run workflow* ohne Haken. Danach solltest du „Überwachung gestartet“ bekommen.
    Im Log von „Preise prüfen“ steht pro Shop der gelesene Preis oder der Fehler.
@@ -44,9 +50,9 @@ Manche Shops (v. a. Amazon) sperren Abrufe aus Rechenzentren. Dann im Log `block
 Optionen: Geizhals-Seite statt Shopseite nutzen, oder das Tool auf dem eigenen PC laufen lassen:
 
 ```bash
-pip install -r requirements.txt
+pip install --require-hashes -r requirements.txt
 python -m pricewatch --probe "https://www.shop.de/produkt/123"   # einzelne Seite testen
-export NTFY_TOPIC=bf-preise-k7x29q                               # Windows: set NTFY_TOPIC=...
+export NTFY_TOPIC=<dein-zufälliger-kanalname>                     # Windows: set NTFY_TOPIC=...
 python -m pricewatch                                             # ein Durchlauf
 ```
 
@@ -63,3 +69,12 @@ Regelmäßig ausführen per `cron` (Linux/macOS) oder Aufgabenplanung (Windows).
 | `--test-notify` | nur Testnachricht |
 
 Tests: `pip install pytest && pytest`
+
+## Abhängigkeiten aktualisieren
+
+`requirements.txt` ist mit Versionen und Hashes festgeschrieben und wird aus `requirements.in` erzeugt
+(Dependabot schlägt Updates wöchentlich vor, ebenso für die gepinnten GitHub Actions):
+
+```bash
+uv pip compile requirements.in --python-version 3.12 --generate-hashes -o requirements.txt
+```

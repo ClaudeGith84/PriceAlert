@@ -70,7 +70,8 @@ def load_watchlist(path: str | Path) -> Watchlist:
         for src in entry.get("sources") or []:
             if isinstance(src, str):
                 src = {"url": src}
-            if not str(src.get("url", "")).startswith("http"):
+            parsed = urlparse(str(src.get("url", "")))
+            if parsed.scheme not in ("http", "https") or not parsed.netloc:
                 raise ValueError(f"{item_id}: ungültige URL {src.get('url')!r}")
             sources.append(Source(url=src["url"], selector=src.get("selector"), label=src.get("label")))
         if not sources:
