@@ -1,0 +1,29 @@
+# Watchlist – hier trägst du deine Artikel ein.
+#
+# Pro Artikel:
+#   name:          Anzeigename (Pflicht)
+#   id:            optional, sonst aus dem Namen erzeugt – nach dem Start nicht mehr ändern
+#   target_price:  optional; extra Alarm mit hoher Priorität, sobald erreicht
+#   sources:       eine oder mehrere Produktseiten. Verglichen wird der günstigste Preis.
+#                  Optional pro Quelle: selector (CSS-Selektor zum Preis), label (Anzeigename)
+#
+# Tipp: Geizhals-Seiten decken viele Shops auf einmal ab (inkl. Amazon).
+
+settings:
+  min_drop_pct: 1.0        # Alarm erst ab 1 % Senkung (0 = jede Senkung)
+  min_drop_eur: 0          # zusätzlich Mindestbetrag in Euro
+  failure_alert_after: 6   # Warnung, wenn so viele Läufe in Folge kein Preis kam
+
+items:
+  - name: Apple AirPods Pro 3
+    id: airpods-pro-3
+    # target_price: 189
+    sources:
+      - url: https://geizhals.de/apple-airpods-pro-3-generation-mfhp4zm-a-a3587143.html
+        label: geizhals
+      - url: https://preisvergleich.heise.de/apple-airpods-pro-3-generation-mfhp4zm-a-a3587143.html
+        label: heise-preisvergleich
+      # Weitere Shops einfach ergänzen, z. B.:
+      # - url: https://www.amazon.de/dp/DEINE-ASIN
+      # - url: https://www.irgendeinshop.de/produkt/123
+      #   selector: ".product-price"
