@@ -1,6 +1,6 @@
 # Preisübersicht
 
-Stand: 23.11.2026 21:54 Uhr
+Stand: 24.11.2026 05:43 Uhr
 
 | Artikel | Aktuell | Shop | Tiefster | Zielpreis |
 |---|---|---|---|---|
@@ -9,5 +9,5 @@ Stand: 23.11.2026 21:54 Uhr
 Details je Shop:
 
 **Apple AirPods Pro 3**
-- geizhals: 189,00 € (zuletzt gelesen 23.11. 21:54)
-- heise-preisvergleich: 189,00 € (zuletzt gelesen 23.11. 21:54)
+- geizhals: 189,00 € (zuletzt gelesen 24.11. 05:43)
+- heise-preisvergleich: 189,00 € (zuletzt gelesen 24.11. 05:43)
