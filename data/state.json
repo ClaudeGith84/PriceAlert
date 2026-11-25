@@ -3,20 +3,20 @@
     "airpods-pro-3": {
       "sources": {
         "geizhals": {
-          "last_price": 189.0,
-          "last_ok": "2026-11-24T15:45:42+00:00"
+          "last_price": 179.0,
+          "last_ok": "2026-11-25T00:35:54+00:00"
         },
         "heise-preisvergleich": {
-          "last_price": 189.0,
-          "last_ok": "2026-11-24T15:45:42+00:00"
+          "last_price": 179.0,
+          "last_ok": "2026-11-25T00:35:54+00:00"
         }
       },
       "failures": 0,
       "failure_alert_sent": false,
-      "best": 189.0,
+      "best": 179.0,
       "best_source": "geizhals",
-      "last_ok": "2026-11-24T15:45:42+00:00",
-      "ref": 189.0,
+      "last_ok": "2026-11-25T00:35:54+00:00",
+      "ref": 179.0,
       "started": "2026-11-23T20:03:48+00:00",
       "target_hit": false
     }
