@@ -29,3 +29,5 @@ timestamp,item_id,source,price,status,error
 2026-11-27T12:02:53+00:00,airpods-pro-3,heise-preisvergleich,169.99,ok,
 2026-11-27T21:07:52+00:00,airpods-pro-3,geizhals,169.99,ok,
 2026-11-27T21:07:52+00:00,airpods-pro-3,heise-preisvergleich,169.99,ok,
+2026-11-28T03:15:50+00:00,airpods-pro-3,geizhals,169.99,ok,
+2026-11-28T03:15:50+00:00,airpods-pro-3,heise-preisvergleich,169.99,ok,
